@@ -1,7 +1,7 @@
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 import SimpleLightbox from 'simplelightbox';
-import 'simplelightbox/dist/simple-lightbox.min.css';
+import 'simplelightbox/dist/simple-lightbox.min.css'; // правильний шлях
 import { fetchImages } from './js/pixabay-api.js';
 import { displayImages } from './js/render-functions.js';
 
