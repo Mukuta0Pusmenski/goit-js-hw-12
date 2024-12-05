@@ -1,1 +1,28 @@
-<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Image Search</title> <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simplelightbox/dist/simple-lightbox.min.css"> <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/izitoast/dist/css/iziToast.min.css"> <link rel="stylesheet" href="./css/styles.css"> <script src="https://cdn.jsdelivr.net/npm/izitoast/dist/js/iziToast.min.js"></script> </head> <body> <form id="search-form"> <label for="search-input">Search for images:</label> <input type="text" id="search-input" placeholder="Type your search here" required> <button type="submit">Start</button> </form> <div id="image-results"></div> <button id="load-more" style="display: none;">Load More</button> <!-- Додано кнопку догрузки --> <div id="loader">Loading...</div> <!-- Додано індикатор завантаження --> <script type="module" src="./main.js"></script> </body> </html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Search</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simplelightbox/dist/simple-lightbox.min.css">
+  <link rel="stylesheet" href="../node_modules/izitoast/dist/css/iziToast.min.css">
+  <link rel="stylesheet" href="./css/styles.css">
+</head>
+
+<body>
+  <form id="search-form">
+    <label for="search-input">Search for images:</label>
+    <input type="text" id="search-input" placeholder="Type your search here" required>
+    <button type="submit">Start</button>
+  </form>
+
+  <div id="image-results"></div>
+  <button id="load-more" style="display: none;">Load More</button> <!-- Додано кнопку догрузки -->
+
+  <div id="loader">Loading...</div> <!-- Додано індикатор завантаження -->
+
+  <script type="module" src="./main.js"></script>
+</body>
+
+</html>
