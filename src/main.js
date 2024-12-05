@@ -16,6 +16,7 @@ if (!form || !searchInput || !imageResults || !loadMoreButton || !loader) {
 } else {
     let currentPage = 1;
     let currentQuery = '';
+    let totalHits = 0; // Додано змінну для загальної кількості хітів
 
     form.addEventListener('submit', async (event) => {
         event.preventDefault();
@@ -51,6 +52,7 @@ if (!form || !searchInput || !imageResults || !loadMoreButton || !loader) {
                 return;
             }
 
+            totalHits = data.totalHits; // Зберігаємо загальну кількість хітів
             displayImages(data.hits, imageResults);
             loadMoreButton.style.display = 'block'; // показати кнопку догрузки
 
@@ -108,6 +110,18 @@ if (!form || !searchInput || !imageResults || !loadMoreButton || !loader) {
                 top: document.documentElement.clientHeight,
                 behavior: 'smooth'
             });
+
+            // Перевірка, чи досягли кінця результатів
+            if ((currentPage * 15) >= totalHits) {
+                loadMoreButton.style.display = 'none';
+                iziToast.info({
+                    title: 'End of results',
+                    message: "We're sorry, but you've reached the end of search results.",
+                    backgroundColor: 'blue',
+                    position: 'center',
+                    timeout: 5000,
+                });
+            }
         } catch (error) {
             iziToast.error({
                 title: 'Error',
