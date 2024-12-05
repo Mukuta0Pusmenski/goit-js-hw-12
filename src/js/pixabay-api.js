@@ -1,9 +1,22 @@
-const API_KEY = '47345734-08f76e4fa789f0ddb3136f311'; // Замініть на ваш унікальний ключ
+import axios from 'axios';
 
-export async function fetchImages(query) {
-    const response = await fetch(`https://pixabay.com/api/?key=${API_KEY}&q=${encodeURIComponent(query)}&image_type=photo&orientation=horizontal&safesearch=true`);
-    if (!response.ok) {
+const API_KEY = '47345734-08f76e4fa789f0ddb3136f311'; // Замініть на ваш унікальний ключ
+const BASE_URL = 'https://pixabay.com/api/';
+
+export async function fetchImages(query, page = 1) {
+    try {
+        const response = await axios.get(BASE_URL, {
+            params: {
+                key: API_KEY,
+                q: query,
+                image_type: 'photo',
+                orientation: 'horizontal',
+                safesearch: true,
+                page: page,
+            },
+        });
+        return response.data;
+    } catch (error) {
         throw new Error('Failed to fetch images');
     }
-    return response.json();
 }
