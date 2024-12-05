@@ -105,9 +105,12 @@ if (!form || !searchInput || !imageResults || !loadMoreButton || !loader) {
 
             loader.style.display = 'none'; // приховати індикатор завантаження
 
-            // Скрол до нових зображень
+            // Отримуємо висоту карточки галереї
+            const { height: cardHeight } = document.querySelector('.image-item').getBoundingClientRect();
+
+            // Скролимо на дві висоти карточки
             window.scrollBy({
-                top: document.documentElement.clientHeight,
+                top: cardHeight * 2,
                 behavior: 'smooth'
             });
 
