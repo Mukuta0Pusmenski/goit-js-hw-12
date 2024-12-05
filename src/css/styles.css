@@ -63,14 +63,3 @@ button[type="submit"]:hover {
 .image-stats p {
   margin: 4px 0;
 }
-
-/* Стилі для індикатора завантаження */
-#loader {
-  display: none;
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 24px;
-  color: #007bff;
-}
