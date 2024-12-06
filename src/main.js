@@ -16,6 +16,7 @@ if (!form || !searchInput || !imageResults || !loadMoreButton || !loader) {
 } else {
     let currentPage = 1;
     let currentQuery = '';
+    const perPage = 15;
     let totalHits = 0; // Додано змінну для загальної кількості хітів
 
     form.addEventListener('submit', async (event) => {
@@ -38,7 +39,7 @@ if (!form || !searchInput || !imageResults || !loadMoreButton || !loader) {
         loader.style.display = 'block'; // показати індикатор завантаження
 
         try {
-            const data = await fetchImages(currentQuery, currentPage);
+            const data = await fetchImages(currentQuery, currentPage, perPage);
 
             if (data.hits.length === 0) {
                 iziToast.error({
@@ -54,7 +55,20 @@ if (!form || !searchInput || !imageResults || !loadMoreButton || !loader) {
 
             totalHits = data.totalHits; // Зберігаємо загальну кількість хітів
             displayImages(data.hits, imageResults);
-            loadMoreButton.style.display = 'block'; // показати кнопку догрузки
+            
+            // Перевірка, чи показувати кнопку "Load more"
+            if (data.totalHits > perPage) {
+                loadMoreButton.style.display = 'block';
+            } else {
+                loadMoreButton.style.display = 'none';
+                iziToast.info({
+                    title: 'End of results',
+                    message: "We're sorry, but you've reached the end of search results.",
+                    backgroundColor: 'blue',
+                    position: 'center',
+                    timeout: 5000,
+                });
+            }
 
             const lightbox = new SimpleLightbox('.image-item a', {
                 captions: true,
@@ -78,7 +92,7 @@ if (!form || !searchInput || !imageResults || !loadMoreButton || !loader) {
         loader.style.display = 'block'; // показати індикатор завантаження
 
         try {
-            const data = await fetchImages(currentQuery, currentPage);
+            const data = await fetchImages(currentQuery, currentPage, perPage);
 
             if (data.hits.length === 0) {
                 iziToast.error({
@@ -115,7 +129,7 @@ if (!form || !searchInput || !imageResults || !loadMoreButton || !loader) {
             });
 
             // Перевірка, чи досягли кінця результатів
-            if ((currentPage * 15) >= totalHits) {
+            if ((currentPage * perPage) >= totalHits) {
                 loadMoreButton.style.display = 'none';
                 iziToast.info({
                     title: 'End of results',

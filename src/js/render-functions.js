@@ -1,7 +1,9 @@
-export function displayImages(images, container) {
-    container.innerHTML = images.map(image => `
+export function displayImages(images, container, append = false) {
+    const markup = images.map(image => `
         <div class="image-item">
-            <img src="${image.webformatURL}" alt="${image.tags}">
+            <a href="${image.largeImageURL}" data-lightbox="image-gallery" data-title="Likes: ${image.likes}, Views: ${image.views}, Comments: ${image.comments}, Downloads: ${image.downloads}">
+                <img src="${image.webformatURL}" alt="${image.tags}">
+            </a>
             <div class="image-stats">
                 <p>Likes: ${image.likes}</p>
                 <p>Views: ${image.views}</p>
@@ -10,4 +12,10 @@ export function displayImages(images, container) {
             </div>
         </div>
     `).join('');
+
+    if (append) {
+        container.innerHTML += markup;
+    } else {
+        container.innerHTML = markup;
+    }
 }
